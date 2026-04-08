@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Japan Family Trip 2026 — Nagoya & Beyond</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Sans+Thai:wght@300;400;500;700&family=Shippori+Mincho:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ocean: #1a4a6b;
+  --ocean-mid: #2d7da8;
+  --ocean-light: #e8f4f8;
+  --moss: #3d6b4f;
+  --moss-light: #e8f0eb;
+  --gold: #c9973a;
+  --gold-light: #fdf3e3;
+  --coral: #e07a5f;
+  --sand-dark: #c4a882;
+  --text: #1a1a2e;
+  --muted: #6b7280;
+  --border: rgba(26,74,107,0.12);
+  --shadow: 0 2px 16px rgba(26,74,107,0.09);
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:'Noto Sans Thai','Noto Sans JP',sans-serif; background:#f0f4f8; color:var(--text); }
+
+/* HERO */
+.hero {
+  background: linear-gradient(160deg, var(--ocean) 0%, #0d2f45 60%, #1a3a2a 100%);
+  padding: 2.5rem 1.5rem 3.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero-sub { font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--sand-dark); margin-bottom:10px; }
+.hero h1 { font-family:'Shippori Mincho',serif; font-size:clamp(20px,5vw,36px); color:#fff; font-weight:600; line-height:1.25; margin-bottom:6px; }
+.hero-sub2 { font-family:'Shippori Mincho',serif; font-size:14px; color:rgba(255,255,255,0.4); margin-bottom:16px; }
+.hero-tags { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-bottom:20px; }
+.hero-tag { font-size:12px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.85); padding:4px 12px; border-radius:20px; }
+.hero-controls { display:flex; flex-direction:column; align-items:center; gap:12px; }
+.wave { position:absolute; bottom:-2px; left:0; right:0; }
+
+/* TOGGLES */
+.toggle-row { display:inline-flex; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.25); border-radius:30px; padding:3px; gap:2px; }
+.tbtn { padding:7px 20px; border-radius:26px; font-size:13px; font-weight:500; cursor:pointer; border:none; background:transparent; color:rgba(255,255,255,0.7); transition:all .2s; font-family:inherit; }
+.tbtn.active { background:#fff; color:var(--ocean); }
+
+/* DAY TABS — sticky below hero */
+.day-tabs-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #f0f4f8;
+  padding: 8px 1rem;
+  display: flex;
+  gap: 6px;
+  justify-content: flex-start;
+  overflow-x: auto;
+  box-shadow: 0 2px 12px rgba(26,74,107,0.08);
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.day-tabs-wrap::-webkit-scrollbar { display: none; }
+.day-tab {
+  flex-shrink: 0;
+  min-width: 100px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1.5px solid var(--border);
+  background: #fff;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all .2s;
+  text-align: center;
+  line-height: 1.4;
+}
+.day-tab .tab-num { display:block; font-size:11px; color:var(--muted); margin-bottom:1px; }
+.day-tab.active-d1 { background:var(--ocean); border-color:var(--ocean); color:#fff; }
+.day-tab.active-d1 .tab-num { color:rgba(255,255,255,0.7); }
+.day-tab.active-d2 { background:var(--moss); border-color:var(--moss); color:#fff; }
+.day-tab.active-d2 .tab-num { color:rgba(255,255,255,0.7); }
+.day-tab.active-d3 { background:#7a4f2e; border-color:#7a4f2e; color:#fff; }
+.day-tab.active-d3 .tab-num { color:rgba(255,255,255,0.7); }
+.day-tab.active-d4 { background:#5a3472; border-color:#5a3472; color:#fff; }
+.day-tab.active-d4 .tab-num { color:rgba(255,255,255,0.7); }
+.day-tab.active-d5 { background:#1a6b5a; border-color:#1a6b5a; color:#fff; }
+.day-tab.active-d5 .tab-num { color:rgba(255,255,255,0.7); }
+
+/* CONTAINER */
+.container { max-width:760px; margin:0 auto; padding:1.25rem 1rem 3rem; }
+
+/* WEATHER */
+.weather-bar { background:#fff; border-radius:14px; padding:12px 16px; margin-bottom:1rem; display:flex; gap:6px; flex-wrap:wrap; align-items:center; box-shadow:var(--shadow); }
+.w-pill { font-size:12px; color:var(--muted); background:var(--ocean-light); padding:3px 10px; border-radius:20px; }
+.w-warn { font-size:12px; background:var(--gold-light); color:var(--gold); padding:3px 12px; border-radius:20px; font-weight:500; margin-left:auto; }
+
+/* DAY HEADER */
+.day-hd { display:flex; align-items:center; gap:12px; margin-bottom:1rem; }
+.day-num { width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-family:'Shippori Mincho',serif; font-size:20px; color:#fff; font-weight:600; flex-shrink:0; }
+.day-num.d1 { background:var(--ocean); }
+.day-num.d2 { background:var(--moss); }
+.day-num.d3 { background:#7a4f2e; }
+.day-num.d4 { background:#5a3472; }
+.day-num.d5 { background:#1a6b5a; }
+.day-hd h2 { font-size:17px; font-weight:700; }
+.day-hd p { font-size:12px; color:var(--muted); margin-top:2px; }
+
+/* OUTFIT */
+.outfit-row { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:1rem; }
+.otag { font-size:12px; background:#fff; border:1px solid var(--border); border-radius:20px; padding:4px 10px; }
+
+/* ROUTE */
+.route-card { background:#fff; border-radius:14px; padding:14px 16px; margin-bottom:1rem; box-shadow:var(--shadow); }
+.route-lbl { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); margin-bottom:10px; }
+.route-steps { display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+.rs { font-size:11px; background:var(--ocean-light); border-radius:8px; padding:5px 10px; color:var(--ocean); text-align:center; line-height:1.4; }
+.rs small { display:block; font-size:10px; opacity:.75; }
+.rs.star { background:var(--moss); color:#fff; font-weight:500; }
+.rarr { color:var(--muted); font-size:12px; }
+
+/* TIMELINE */
+.tl-row { display:grid; grid-template-columns:52px 1fr; gap:10px; margin-bottom:9px; }
+.tl-t { font-size:11px; font-weight:700; color:var(--muted); text-align:right; padding-top:13px; }
+.card { background:#fff; border-radius:14px; padding:12px 14px; box-shadow:var(--shadow); border-left:3px solid transparent; }
+.card.c-blue { border-left-color:var(--ocean-mid); }
+.card.c-green { border-left-color:var(--moss); }
+.card.c-gold { border-left-color:var(--gold); }
+.card.c-coral { border-left-color:var(--coral); }
+.card-title { font-size:13px; font-weight:700; color:var(--text); margin-bottom:3px; line-height:1.4; }
+.card-desc { font-size:12px; color:var(--muted); line-height:1.6; }
+.badge { display:inline-block; font-size:11px; padding:2px 8px; border-radius:6px; margin-top:5px; line-height:1.5; margin-right:3px; }
+.b-hist { background:#e8f0fb; color:#1a4a8a; }
+.b-tip { background:var(--gold-light); color:#8a6220; }
+.b-good { background:var(--moss-light); color:var(--moss); }
+.prices { display:flex; gap:6px; flex-wrap:wrap; margin-top:6px; }
+.ptag { font-size:11px; background:var(--ocean-light); color:var(--ocean); padding:2px 8px; border-radius:6px; }
+
+/* NOTES */
+.notes-lbl { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); margin:1rem 0 .5rem; }
+.notes-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.ni { background:#fff; border-radius:10px; padding:10px 12px; box-shadow:var(--shadow); }
+.ni-k { font-size:11px; color:var(--muted); margin-bottom:2px; }
+.ni-v { font-size:13px; font-weight:500; }
+
+.footer { text-align:center; font-size:12px; color:var(--muted); padding:1.5rem 0; border-top:1px solid var(--border); margin-top:2rem; }
+
+@media(max-width:480px){ .notes-grid{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-sub" id="h-sub"></p>
+  <h1 id="h-title"></h1>
+  <p class="hero-sub2" id="h-sub2"></p>
+  <div class="hero-tags" id="h-tags"></div>
+  <div class="hero-controls">
+    <div class="toggle-row">
+      <button class="tbtn active" id="btn-th" onclick="setLang('th')">ไทย</button>
+      <button class="tbtn" id="btn-jp" onclick="setLang('jp')">日本語</button>
+    </div>
+  </div>
+  <svg class="wave" viewBox="0 0 1440 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,20 C360,40 720,0 1080,20 C1260,30 1380,15 1440,20 L1440,40 L0,40 Z" fill="#f0f4f8"/>
+  </svg>
+</div>
+
+<!-- DAY TABS -->
+<div class="day-tabs-wrap">
+  <button class="day-tab" id="tab-1" onclick="setDay(1)">
+    <span class="tab-num" id="tab1-num"></span>
+    <span id="tab1-title"></span>
+  </button>
+  <button class="day-tab" id="tab-2" onclick="setDay(2)">
+    <span class="tab-num" id="tab2-num"></span>
+    <span id="tab2-title"></span>
+  </button>
+  <button class="day-tab" id="tab-3" onclick="setDay(3)">
+    <span class="tab-num" id="tab3-num"></span>
+    <span id="tab3-title"></span>
+  </button>
+  <button class="day-tab" id="tab-4" onclick="setDay(4)">
+    <span class="tab-num" id="tab4-num"></span>
+    <span id="tab4-title"></span>
+  </button>
+  <button class="day-tab" id="tab-5" onclick="setDay(5)">
+    <span class="tab-num" id="tab5-num"></span>
+    <span id="tab5-title"></span>
+  </button>
+  <button class="day-tab" id="tab-6" onclick="setDay(6)">
+    <span class="tab-num" id="tab6-num"></span>
+    <span id="tab6-title"></span>
+  </button>
+</div>
+
+<!-- CONTENT -->
+<div class="container" id="main-content"></div>
+
+<script>
+var TH = {
+  heroSub:'แผนการเดินทาง · เมษายน 2569',
+  heroTitle:'ปลื้มและครอบครัว<br>Japan Family Adventure 2026',
+  heroSub2:'Nagoya · Himakajima · Takayama · Seto · Ghibli',
+  heroTags:['4 คน · 6 วัน','9–14 เม.ย. 2569','เที่ยวบิน TG644'],
+  tabNums:['วันที่ 1 · 9 เม.ย.','วันที่ 2 · 10 เม.ย.','วันที่ 3 · 11 เม.ย.','วันที่ 4 · 12 เม.ย.','วันที่ 5 · 13 เม.ย.','วันที่ 6 · 14 เม.ย.'],
+  tabTitles:['ฮิมากะจิมะ 🏝️','Beach Land 🐬','ทาคายาม่า 🏔️','เซโตะ 🐱','จิบลิ 🎬','กลับบ้าน ✈️'],
+  days:[
+    {
+      num:'1',cls:'d1',
+      title:'เกาะฮิมากะจิมะ 🏝️',
+      sub:'พฤหัส 9 เม.ย. · ถึง NGO 08:00 น. · 4 คน',
+      weather:['🌤 สูง 19°C','🌡 ต่ำ 9°C','🌧 ฝน 80%','💨 ลม 23 km/h'],
+      wwarn:'⚠ พกร่ม + เสื้อกันลม',
+      outfit:['👕 เสื้อแขนยาว','🧥 เสื้อกันลม/ฝน','👖 กางเกงขายาว','👟 รองเท้ากันน้ำ','☂️ ร่มพับ','🧢 หมวก'],
+      routeLbl:'เส้นทาง — จาก NGO ถึงเกาะ',
+      route:[{t:'NGO',s:'08:00'},{t:'รถไฟ Meitetsu',s:'~50 นาที'},{t:'Kowa Port',s:'เดิน 8 นาที'},{t:'เรือเร็ว',s:'~20 นาที'},{t:'East Port ✓',s:'ใกล้โรงแรม',star:true}],
+      tl:[
+        {t:'08:00',title:'ลงเครื่อง → ออกเดินทาง',desc:'รับกระเป๋า ขึ้นรถไฟ Meitetsu สาย Kowa Line จากสนามบิน',cls:'c-blue'},
+        {t:'~10:00',title:'ถึง East Port → ฝากกระเป๋าโรงแรม',desc:'เดินจาก East Port ไปโรงแรม Himakaso ~5 นาที · ฝากกระเป๋า เช็คอินได้ 15:00 น.',cls:'c-green',badges:[{c:'b-hist',t:'🏛 ที่ดินครึ่งนึงของเกาะเป็นของสำนักพระราชวังญี่ปุ่น อายุกว่า 1,400 ปี'}]},
+        {t:'10:30',title:'เดินชม West Port + รูปปลาหมึกยักษ์',desc:'เดินข้ามเกาะ ~15 นาที · ถ่ายรูปอนุสาวรีย์ปลาหมึก + สถานีตำรวจทรงปลาหมึก (แห่งเดียวในญี่ปุ่น!)',cls:'',badges:[{c:'b-hist',t:'🐙 ตำนาน: ชาวประมงพบพระพุทธรูปมีปลาหมึกยักษ์พันรอบปกป้องอยู่ — ที่มาของ "เกาะปลาหมึก"'}]},
+        {t:'11:30',title:'มื้อกลางวัน — ร้าน Otohime (ริม West Port)',desc:'ปลาหมึกต้มทั้งตัว + ซาชิมิสด · ตู้ปลาขนาดใหญ่ในร้าน',cls:'c-gold',badges:[{c:'b-tip',t:'⏰ ไปก่อน 11:30 น. คิวยาวมาก!'}]},
+        {t:'13:30',title:"Sunset Beach + Heidi's Swing",desc:'ชิงช้าไม้บนเนิน วิวทะเลกว้าง · จุดถ่ายรูปฮิตที่สุดบนเกาะ',cls:'',badges:[{c:'b-tip',t:'☔ ถ้าฝนตก แวะร้านกาแฟแถว West Port ก่อน'}]},
+        {t:'14:30',title:'วัด Anrakuji + ของที่ระลึก',desc:'เดิน 4 นาทีจาก East Port · แผ่น ema รูปปลาหมึก · ซื้อ Tako Manju',cls:'',badges:[{c:'b-hist',t:'🏛 วัดสร้าง ค.ศ. 1493 · ประดิษฐาน "พระอมิดะปลาหมึก" พระพุทธรูปเก่าแก่ที่สุดบนเกาะ'}]},
+        {t:'14:50',title:'วัด Kokai-In — อนุสรณ์ซามูไร 47 โรนิน',desc:'อนุสรณ์ "โอตากะ เก็งโก" ซามูไรในตำนาน บ้านเกิดอยู่บนเกาะนี้',cls:'',badges:[{c:'b-hist',t:'⚔️ หนึ่งใน 47 โรนิน วีรบุรุษซามูไร เกิด ค.ศ. 1672'}]},
+        {t:'15:00',title:'เช็คอิน Hotel Himakaso',desc:'พักผ่อน · ใส่ยูกาตะ · แช่ออนเซ็นชมวิว Mikawa Bay',cls:'c-coral'},
+        {t:'18:00',title:'มื้อค่ำ — รวมในแพ็กเกจแล้ว!',desc:'จานซีฟู้ดสไตล์เรือ · ปลาหมึกต้ม · ปูขน · ซาชิมิสด',cls:'c-gold'}
+      ],
+      notesLbl:'จำไว้ก่อนไป',
+      notes:[{k:'เช็คอิน',v:'15:00 – 19:30'},{k:'ท่าเรือที่ลง',v:'East Port (ใกล้โรงแรม)'},{k:'เงิน',v:'เตรียมเงินสด'},{k:'รอบเกาะ',v:'~5.5 km / 2 ชม.'}]
+    },
+    {
+      num:'2',cls:'d2',
+      title:'Minamichita Beach Land 🐬',
+      sub:'ศุกร์ 10 เม.ย. · เช้าที่เกาะ → บ่ายแผ่นดินใหญ่ · 4 คน',
+      weather:['🌤 สูง 19°C','🌡 ต่ำ 13°C','🌧 ฝน 80%','💨 ลม 23 km/h'],
+      wwarn:'⚠ พกร่ม ลมแรง',
+      outfit:['👕 เสื้อแขนยาว','🧥 เสื้อกันลม/ฝน','👖 กางเกงขายาว','👟 รองเท้าสบาย','☂️ ร่มพับ'],
+      routeLbl:'เส้นทาง — จากเกาะสู่ Beach Land',
+      route:[{t:'Himakaso',s:'East Port'},{t:'เรือ+รถไฟ',s:'~1.5 ชม.'},{t:'Chita Okuda',s:'ลงที่นี่'},{t:'Kamenoi ฝากกระเป๋า',s:'เดิน ~15 นาที',star:true},{t:'Beach Land',s:'เดิน ~6 นาที',star:true}],
+      tl:[
+        {t:'07:00',title:'อาหารเช้า — Hotel Himakaso (รวมแพ็กเกจ)',desc:'ทานบนเกาะ วิวทะเล Mikawa Bay ตอนเช้า',cls:'c-gold',badges:[{c:'b-tip',t:'⏰ เช็คเอาต์ก่อน 10:00 น. เก็บกระเป๋าให้พร้อม'}]},
+        {t:'08:30',title:'เช็คเอาต์ + เดินไป East Port',desc:'เดินจากโรงแรม ~5 นาที · ขึ้นเรือเร็วกลับแผ่นดินใหญ่',cls:'c-blue'},
+        {t:'~10:15',title:'แวะ Kamenoi Hotel — ฝากกระเป๋า',desc:'เดินจากสถานีไป Kamenoi ~15 นาที · ฝากกระเป๋า แล้วเดินต่อไป Beach Land อีก 6 นาที',cls:'c-green',badges:[{c:'b-tip',t:'💬 บอกว่า「荷物を預けられますか？」(ขอฝากกระเป๋าได้ไหม)'},{c:'b-good',t:'ประหยัดเวลา ไม่ต้องลากกระเป๋าทั้งวัน!'}]},
+        {t:'10:45',title:'เข้า Beach Land — มือว่างเที่ยวสบาย!',desc:'เดินจาก Kamenoi ~6 นาที · เช็คตารางโชว์ที่บอร์ดทางเข้าก่อนเลย',cls:'c-green',badges:[{c:'b-hist',t:'🏛 เปิดปี 1980 · อควาเรียมสัมผัสสัตว์ทะเลอันดับ 1 ญี่ปุ่น · ตู้น้ำ 1,000 ตัน'}],prices:['ผู้ใหญ่ 2,200 ¥','เด็ก 1,100 ¥','บัตรเล่นครบ 2,200 ¥']},
+        {t:'11:00',title:'โชว์โลมา + สิงโตทะเล',desc:'จุดไฮไลต์! มีหลายรอบตลอดวัน',cls:'c-blue',badges:[{c:'b-good',t:'เหมาะมากสำหรับครอบครัว'}]},
+        {t:'12:00',title:'Touch & Feed — สัมผัสสัตว์ทะเล',desc:'ให้อาหารและแตะแมวน้ำ วอลรัส เพนกวิน',cls:'c-blue',badges:[{c:'b-good',t:'ไม่ควรพลาด!'}]},
+        {t:'13:00',title:'มื้อกลางวัน — ร้านในสวน',desc:'มีร้านอาหารหลายร้านภายใน Beach Land',cls:'c-gold'},
+        {t:'14:00',title:'Toy Kingdom — ของเล่น 600 ชนิด',desc:'Plarail รถไฟโมเดล · ตุ๊กตา Licca-chan · เด็กๆ เล่นได้เป็นชั่วโมง',cls:'',badges:[{c:'b-hist',t:'🏛 เปิดปี 2006 · ออกแบบให้เด็กเรียนรู้ผ่านการเล่น'}]},
+        {t:'15:00',title:'เดินกลับ Kamenoi — เช็คอิน!',desc:'เดินแค่ 6 นาที · รับกระเป๋า · เช็คอินเข้าห้อง · แช่ออนเซ็นวิว Ise Bay',cls:'c-coral',badges:[{c:'b-good',t:'น้ำแร่ pH 8.1 บำรุงผิว · มองเห็น Centrair จากห้องพิเศษ!'}]},
+        {t:'18:00',title:'มื้อค่ำ — ยังไม่ได้จอง (แนะนำ 2 ตัวเลือก)',desc:'⭐ แนะนำ: Maruha Shokudo — ร้านดังอันดับ 1 ของแถบนี้ · กุ้งทอดจัมโบ้ + ซาชิมิสด · ขับรถ ~15 นาที · โทรจองก่อน +81-569-65-1315 | หรือ Kamenoi Restaurant ในโรงแรมก็ได้ครับ',cls:'c-gold',badges:[{c:'b-tip',t:'📞 Maruha เปิด 17:00–20:00 น. · แนะนำโทรจองล่วงหน้าเพราะคนเยอะ'},{c:'b-hist',t:'🦐 เมนูเด็ด: กุ้งทอดจัมโบ้ + ซาชิมิสด + ปลาปักเป้า (ถ้าสั่งพิเศษ)'}]}
+      ],
+      notesLbl:'จำไว้ก่อนไป',
+      notes:[{k:'เช็คเอาต์ (Himakaso)',v:'ก่อน 10:00 น.'},{k:'เช็คอิน (Kamenoi)',v:'15:00 น.'},{k:'Beach Land ปิด',v:'16:00 น. (วันธรรมดา)'},{k:'Kamenoi → Beach Land',v:'เดิน ~6 นาที'}]
+    },
+    {
+      num:'3',cls:'d3',
+      title:'นาโกย่า → ทาคายาม่า 🏔️',
+      sub:'เสาร์ 11 เม.ย. · 5 คน (ยูโกะมาร่วม 11:00 น.)',
+      weather:['🌤 สูง 21°C','🌡 ต่ำ 11°C','🌤 แดดบางส่วน 20%','💨 ลม 15 km/h'],
+      wwarn:'✅ อากาศดีที่สุดของทริป!',
+      outfit:['👕 เสื้อแขนยาว','🧥 เสื้อกันหนาวบาง','👖 กางเกงขายาว','👟 รองเท้าเดิน','🧣 ผ้าพันคอ (ทาคายาม่าเย็นกว่า)'],
+      routeLbl:'เส้นทาง — นาโกย่า → ทาคายาม่า (ขับรถ)',
+      route:[{t:'Kamenoi',s:'เช็คเอาต์'},{t:'นาโกย่า',s:'รับรถ + เจอยูโกะ',star:true},{t:'ขับรถ',s:'~2.5 ชม.'},{t:'ทาคายาม่า',s:'เช็คอิน FAV LUX'}],
+      tl:[
+        {t:'08:00',title:'อาหารเช้า + เช็คเอาต์ Kamenoi',desc:'บุฟเฟต์เช้าที่โรงแรม · เช็คเอาต์ก่อน 10:00 น.',cls:'c-gold'},
+        {t:'10:00',title:'รับรถเช่า + เจอยูโกะที่นาโกย่า',desc:'เดินทางจาก Kamenoi ไปนาโกย่า · รับรถเช่าและนัดเจอยูโกะที่จุดเดียวกัน · ทั้ง 5 คนพร้อมแล้วออกเดินทาง!',cls:'c-green',badges:[{c:'b-good',t:'👋 ยูโกะมาร่วมทริปแล้ว!'},{c:'b-tip',t:'🚗 เตรียม ETC card และ GPS ให้พร้อม'}]},
+        {t:'~12:30',title:'ถึงทาคายาม่า + มื้อกลางวัน',desc:'แวะร้านอาหารในเมือง · ลองเมนูท้องถิ่น Hida Beef หรือ Takayama Ramen',cls:'c-gold',badges:[{c:'b-hist',t:'🏔️ ทาคายาม่าถูกเรียกว่า "เกียวโตน้อย" · ชุมชนพ่อค้ายุคเอโดะที่ได้รับการอนุรักษ์ดีที่สุดในญี่ปุ่น'}]},
+        {t:'14:30',title:'Sanmachi Suji — ย่านเมืองเก่า',desc:'เดินชมถนนไม้สไตล์เอโดะ · ร้านสาเก · ร้านหัตถกรรม · ลองชิม Hida Beef บนเสียบ',cls:'c-green',badges:[{c:'b-hist',t:'🏛 เมืองนี้เคยอยู่ภายใต้การปกครองโดยตรงของโชกุน Tokugawa เพราะมีช่างไม้ฝีมือเยี่ยม'}]},
+        {t:'15:30',title:'Miyagawa Morning Market (ชมบรรยากาศ)',desc:'แม้ตลาดเช้าจะปิดแล้ว แต่ย่านริมแม่น้ำ Miyagawa ยังสวยงามมาก ถ่ายรูปได้',cls:''},
+        {t:'16:00',title:'Takayama Jinya — บ้านพักราชการยุคเอโดะ',desc:'สถานที่ราชการยุคเอโดะที่ยังสมบูรณ์เพียงแห่งเดียวในญี่ปุ่น · มีป้ายภาษาอังกฤษ',cls:'',badges:[{c:'b-hist',t:'🏛 สร้างปี ค.ศ. 1692 ใช้บริหารงานถึงปี 1969 — กว่า 270 ปี!'}]},
+        {t:'17:30',title:'เช็คอิน FAV LUX HIDATAKAYAMA',desc:'โรงแรมสไตล์ญี่ปุ่น · มี Breakfast · 1 ห้อง 5 คน',cls:'c-coral'},
+        {t:'19:00',title:'มื้อค่ำ — ยังไม่ได้จอง (แนะนำ 2 ตัวเลือก)',desc:'⭐ แนะนำ 1: Suzuya Restaurant — ร้านดังในอาคารไม้เก่าแก่ ย่าน Sanmachi · Hida Beef Sukiyaki บนกระทะเหล็ก ~2,500–3,500 ¥/คน | ⭐ แนะนำ 2: Hidagyu Maruaki — ร้านเนื้อย่างที่มีฟาร์มเนื้อของตัวเอง · ไม่รับจอง ไปก่อนเวลา Dinner',cls:'c-gold',badges:[{c:'b-tip',t:'🥩 Suzuya: 24 Hanakawamachi, Takayama · English-friendly · เปิดถึง ~20:00 น.'},{c:'b-hist',t:'🏛 Hida Beef = วัวญี่ปุ่นหินอ่อน เลี้ยงในจ.กิฟุ รสชาติไม่แพ้ Kobe Beef เลย!'}]}
+      ],
+      notesLbl:'จำไว้ก่อนไป',
+      notes:[{k:'เช็คอิน FAV LUX',v:'ตามเวลาที่จอง'},{k:'ผู้โดยสาร',v:'5 คน (รวมยูโกะ)'},{k:'เส้นทางขับ',v:'นาโกย่า → ทาคายาม่า ~2.5 ชม.'},{k:'อากาศทาคายาม่า',v:'เย็นกว่านาโกย่า ~5°C'}]
+    },
+    {
+      num:'4',cls:'d4',
+      title:'ทาคายาม่า → เซโตะ 🐱',
+      sub:'อาทิตย์ 12 เม.ย. · 5 คน · ขับรถ',
+      weather:['🌤 สูง 20°C','🌡 ต่ำ 12°C','🌦 ฝนบางส่วน 50%','💨 ลม 12 km/h'],
+      wwarn:'⚠ มีโอกาสฝน เตรียมร่มไว้',
+      outfit:['👕 เสื้อแขนยาว','🧥 เสื้อแจ็คเก็ตบาง','👖 กางเกงขายาว','👟 รองเท้าเดิน','☂️ ร่มพับ'],
+      routeLbl:'เส้นทาง — ทาคายาม่า → เซโตะ (ขับรถ)',
+      route:[{t:'FAV LUX',s:'เช็คเอาต์'},{t:'ขับรถ',s:'~2 ชม.'},{t:'เซโตะ',s:'Seto City'},{t:'Manekineko Museum',s:'แมวนำโชค',star:true},{t:'Setogura Museum',s:'เซรามิก',star:true},{t:'Masukichi',s:'เช็คอิน'}],
+      tl:[
+        {t:'08:00',title:'อาหารเช้า (รวมแพ็กเกจ) + เช็คเอาต์',desc:'ทานเช้าที่ FAV LUX · เก็บกระเป๋าออกเดินทาง',cls:'c-gold'},
+        {t:'09:00',title:'ขับรถจากทาคายาม่า → เซโตะ',desc:'ระยะทาง ~120 กม. ใช้เวลา ~2 ชั่วโมง · ผ่านวิวภูเขาญี่ปุ่นอัลป์',cls:'c-blue'},
+        {t:'11:00',title:'Manekineko Museum — พิพิธภัณฑ์แมวนำโชค',desc:'แมวนำโชค 5,000 ตัวจากทั่วญี่ปุ่น · ทำ Manekineko ของตัวเองได้ในเวิร์คช็อป',cls:'c-green',badges:[{c:'b-hist',t:'🐱 เมืองเซโตะผลิต Manekineko สไตล์ดั้งเดิมมาตั้งแต่ต้นศตวรรษที่ 20 · ปัจจุบันมีพิพิธภัณฑ์แห่งนี้ที่ใหญ่ที่สุดในญี่ปุ่น'}],prices:['ผู้ใหญ่ ~500 ¥','เวิร์คช็อปทำแมว เพิ่มเติม']},
+        {t:'12:30',title:'มื้อกลางวัน + ชม Setogura Museum',desc:'ทานอาหารในร้านของ Setogura Complex · แล้วชมพิพิธภัณฑ์เซรามิก',cls:'c-gold',badges:[{c:'b-hist',t:'🏺 เซโตะมีประวัติการผลิตเซรามิกกว่า 1,000 ปี — เป็น 1 ใน 6 เตาเผาโบราณที่มีชื่อเสียงของญี่ปุ่น'}],prices:['ผู้ใหญ่ 520 ¥','นักเรียน 310 ¥']},
+        {t:'14:00',title:'Kamagaki no Komichi — เส้นทางกำแพงเซรามิก',desc:'เดินตามเส้นทาง 400 ม. ที่กำแพงสองข้างทางทำจากเศษเซรามิก · บรรยากาศย้อนยุค',cls:'',badges:[{c:'b-hist',t:'🏛 เศษเซรามิกที่ใช้สร้างกำแพงมีอายุกว่า 100 ปี สะท้อนประวัติอุตสาหกรรมเมือง'}]},
+        {t:'15:30',title:'ขับรถต่อ → เช็คอิน Masukichi',desc:'เดินทางต่อไปยังโรงแรม Masukichi · 2 ห้อง ไม่รวมอาหาร',cls:'c-coral',badges:[{c:'b-tip',t:'📍 เช็คที่พักใน Google Maps ล่วงหน้า'}]},
+        {t:'18:00',title:'มื้อค่ำ — ยังไม่ได้จอง (แนะนำ Nagoya Meshi)',desc:'⭐ แนะนำ 1: Misokatsu Yabaton — ร้านมิโซะคัตสึดังที่สุดในนาโกย่า มากว่า 60 ปี · สาขาหลายที่ใกล้ Nagoya Station | ⭐ แนะนำ 2: Sekai no Yamachan — ต้นตำรับ Tebasaki ปีกไก่ทอดสูตรพิเศษ ก่อตั้งปี 1981',cls:'c-gold',badges:[{c:'b-tip',t:'🍱 Nagoya Meshi ที่ต้องลอง: Miso Katsu · Tebasaki · Hitsumabushi (ข้าวหน้าปลาไหล)'},{c:'b-hist',t:'🏙 นาโกย่ามีวัฒนธรรมอาหารเป็นเอกลักษณ์เฉพาะตัว ไม่เหมือนที่อื่นในญี่ปุ่น!'}]}
+      ],
+      notesLbl:'จำไว้ก่อนไป',
+      notes:[{k:'Manekineko Museum',v:'ปิดวันอังคาร'},{k:'Setogura เปิด',v:'09:00–17:00 น.'},{k:'ค่าเข้า Setogura',v:'520 ¥ / คน'},{k:'Masukichi',v:'2 ห้อง · ไม่รวมอาหาร'}]
+    },
+    {
+      num:'5',cls:'d5',
+      title:'จิบลิ พาร์ค + ขากลับ 🎬',
+      sub:'จันทร์ 13 เม.ย. · 5 คน → ยูโกะกลับโอซาก้า · บิน 14 เม.ย.',
+      weather:['🌤 สูง 19°C','🌡 ต่ำ 12°C','🌦 ฝนบางส่วน 40%','💨 ลม 10 km/h'],
+      wwarn:'⚠ มีโอกาสฝนบ้าง เตรียมร่ม',
+      outfit:['👕 เสื้อแขนยาว','🧥 เสื้อแจ็คเก็ต','👖 กางเกงขายาว','👟 รองเท้าเดินสบาย','☂️ ร่มพับ'],
+      routeLbl:'เส้นทาง — ไป Ghibli Park',
+      route:[{t:'Masukichi',s:'เช็คเอาต์'},{t:'คืนรถเช่า',s:'นาโกย่า'},{t:'รถไฟ+Linimo',s:'~50 นาที',star:true},{t:'Ghibli Park',s:'เข้าตามเวลา'},{t:'โรงแรม',s:'Sanco Inn NGO'}],
+      tl:[
+        {t:'07:00',title:'อาหารเช้า + เช็คเอาต์ Masukichi',desc:'เช็คเอาต์ · เก็บกระเป๋าให้เรียบร้อย · คืนรถเช่าที่นาโกย่า',cls:'c-gold'},
+        {t:'09:00',title:'คืนรถเช่า + ไป Ghibli Park',desc:'จากนาโกย่าสถานี: รถไฟ Higashiyama Line → Fujigaoka → Linimo ลงที่ Ai-Chikyuhaku-Kinen-Koen',cls:'c-blue',badges:[{c:'b-tip',t:'🚇 ใช้เวลาจากนาโกย่าสถานีรวม ~50 นาที'}]},
+        {t:'10:00',title:'เข้า Ghibli Park — Grand Warehouse (เวลาที่จอง)',desc:'เช็คเวลาเข้าตามบัตร · Grand Warehouse มีนิทรรศการ Spirited Away, Totoro, Howl\'s Moving Castle',cls:'c-green',badges:[{c:'b-hist',t:'🎬 Ghibli Park เปิดปี 2022 บนพื้นที่ World Expo 2005 · ออกแบบโดย Hayao Miyazaki ให้กลมกลืนกับธรรมชาติ'}],prices:['O-Sanpo Premium 7,800 ¥','O-Sanpo Standard 4,500 ¥']},
+        {t:'11:00',title:'Mononoke Village — หมู่บ้านเจ้าหญิงโมโนโนเกะ',desc:'บรรยากาศหมู่บ้านโบราณ · ทำ Gohei-mochi ข้าวปั้นย่างแบบดั้งเดิมได้ (มีค่าใช้จ่ายเพิ่ม)',cls:''},
+        {t:'12:30',title:'มื้อกลางวัน — ร้านในสวน',desc:'ร้าน Transcontinental Flight Café หรือ Flying Oven · อาหารธีม Ghibli สไตล์ยุโรป',cls:'c-gold',badges:[{c:'b-tip',t:'🍽 จองโต๊ะล่วงหน้าหรือไปเร็วเพราะเต็มเร็ว!'}]},
+        {t:'13:30',title:'Valley of Witches — ปราสาท Howl + บ้าน Kiki',desc:'ปราสาท Howl\'s Moving Castle · บ้าน Kiki\'s Delivery Service · ต้องใช้ Premium Pass เข้าข้างใน',cls:'c-green',badges:[{c:'b-tip',t:'⭐ Premium Pass คุ้มมากถ้าอยากเข้าข้างใน Howl\'s Castle'}]},
+        {t:'15:30',title:'ช้อปปิ้ง + ของที่ระลึก Ghibli',desc:'ร้านของที่ระลึกใน Grand Warehouse · ซื้อ Totoro, No-Face, Calcifer ก่อนกลับ',cls:'',badges:[{c:'b-tip',t:'🛍 ของที่ระลึก Ghibli Park Edition มีเฉพาะที่นี่เท่านั้น!'}]},
+        {t:'17:00',title:'เดินทางไปโรงแรม Sanco Inn Nagoya',desc:'เช็คอิน Sanco Inn Nagoya Shinkansenguchi · 2 ห้อง ไม่รวมอาหาร · ใกล้สถานีรถไฟชินกันเซน',cls:'c-coral'},
+        {t:'18:30',title:'มื้อค่ำ + ช้อปปิ้ง นาโกย่า',desc:'ย่าน Sakae หรือ Nagoya Station · ลอง Miso Katsu, Hitsumabushi หรือ Nagoya Ramen',cls:'c-gold',badges:[{c:'b-tip',t:'✈️ เที่ยวบิน TG645 ออก 11:00 น. วันพรุ่งนี้ · เดินไปสนามบิน Shinkansen ~30 นาที'}]}
+      ],
+      notesLbl:'จำไว้ก่อนวันสุดท้าย',
+      notes:[{k:'Ghibli Park ปิด',v:'วันอังคาร ✅ วันจันทร์เปิด'},{k:'บัตรจอง',v:'ต้องซื้อล่วงหน้า ผ่าน Klook/Lawson'},{k:'เที่ยวบินขากลับ',v:'TG645 · 14 เม.ย. · 11:00 น.'},{k:'Sanco Inn',v:'ใกล้ NGO Shinkansen Terminal'}]
+    },
+    {
+      num:'6',cls:'d1',
+      title:'วันเดินทางกลับ ✈️',
+      sub:'อังคาร 14 เม.ย. · 4 คน · TG645 ออก 11:00 น.',
+      weather:['🌤 สูง 20°C','🌡 ต่ำ 12°C','🌦 ฝนเล็กน้อย 70%','💨 ลม 15 km/h'],
+      wwarn:'⚠ ฝนเล็กน้อย · เช็คสภาพอากาศก่อนออก',
+      outfit:['👕 ชุดสบายสำหรับนั่งเครื่อง','🧥 เสื้อกันหนาวบาง (เครื่องแอร์เย็น)','👟 รองเท้าถอดง่าย','🎒 พกของจำเป็นในกระเป๋าสะพาย'],
+      routeLbl:'เส้นทาง — Sanco Inn → สนามบิน NGO',
+      route:[{t:'Sanco Inn',s:'เช็คเอาต์'},{t:'รถไฟ Shinkansen',s:'~30 นาที',star:true},{t:'NGO · Terminal 1',s:'TG645'},{t:'BKK Suvarnabhumi',s:'15:00 น.'}],
+      tl:[
+        {t:'07:00',title:'ตื่นนอน + เก็บกระเป๋า',desc:'เช็คกระเป๋าให้ครบ · อย่าลืมของที่ซื้อมาจากทริป · เช็คบัตรโดยสารและหนังสือเดินทาง',cls:'c-blue',badges:[{c:'b-tip',t:'📋 เช็คลิสต์: หนังสือเดินทาง · บัตรขึ้นเครื่อง · ชาร์จเจอร์ · ยา · ของที่ระลึก'}]},
+        {t:'08:00',title:'มื้อเช้าแบบเร็ว',desc:'ร้านสะดวกซื้อใกล้โรงแรม หรือ Shinkansen Bento ในสถานี · ของกิน 7-Eleven ญี่ปุ่นอร่อยมาก!',cls:'c-gold',badges:[{c:'b-tip',t:'🍱 ซื้อ Onigiri หรือ Sandwich จาก 7-Eleven ในสถานีได้เลย'}]},
+        {t:'08:30',title:'เช็คเอาต์ Sanco Inn',desc:'เช็คเอาต์ · ขอบคุณพนักงาน · ออกเดินทางไปสถานีชินกันเซน',cls:''},
+        {t:'09:00',title:'ขึ้นรถไฟ Shinkansen/รถไฟไป NGO',desc:'จาก Nagoya Shinkansen Station ไป Chubu Centrair (NGO) · ประมาณ 30 นาที',cls:'c-blue',badges:[{c:'b-tip',t:'🚄 ใช้ Meitetsu Limited Express จากนาโกย่า → NGO ค่าโดยสารประมาณ 870 เยน'}]},
+        {t:'09:30',title:'ถึงสนามบิน NGO · Terminal 1',desc:'Check-in เคาน์เตอร์ Thai Airways · เที่ยวบิน TG645 · แนะนำให้ถึงก่อนอย่างน้อย 1.5 ชม.',cls:'c-green',badges:[{c:'b-tip',t:'🛂 Immigration ที่ญี่ปุ่นใช้เวลา ไม่ควรไปสาย'}]},
+        {t:'10:00',title:'ผ่านด่านตรวจและเข้า Duty Free',desc:'ช้อปปิ้ง Duty Free สุดท้าย · Kit Kat รสพิเศษ · ขนม · เหล้าสาเก · น้ำหอม',cls:'',badges:[{c:'b-tip',t:'🛍 NGO มี Duty Free ที่ดี ซื้อ Kit Kat Matcha และ Uji Matcha ได้ที่นี่'}]},
+        {t:'11:00',title:'✈️ TG645 ออกเดินทาง — นาโกย่า → กรุงเทพฯ',desc:'Boarding เวลา 10:30 น. · ใช้เวลาบิน ~6 ชั่วโมง · ถึง BKK Suvarnabhumi เวลา 15:00 น.',cls:'c-coral',badges:[{c:'b-good',t:'🏠 กลับบ้านได้แล้ว! ขอบคุณทริปดีๆ ครั้งนี้ครับ 🎌'}]}
+      ],
+      notesLbl:'สิ่งสำคัญวันเดินทาง',
+      notes:[{k:'เที่ยวบิน',v:'TG645 · ออก 11:00 น.'},{k:'Terminal',v:'NGO Terminal 1'},{k:'Check-in ปิด',v:'ก่อน 10:15 น.'},{k:'ถึง BKK',v:'15:00 น. (Suvarnabhumi)'}]
+    }
+  ],
+  footer:'จัดทำโดย Claude · เมษายน 2569 · ขอให้เดินทางปลอดภัยและสนุกครับ! 🎌'
+};
+
+var JP = {
+  heroSub:'旅行プラン · 2026年4月',
+  heroTitle:'ぷルームと家族<br>Japan Family Adventure 2026',
+  heroSub2:'名古屋発 · 日間賀島 · 高山 · 瀬戸 · ジブリパーク',
+  heroTags:['5名 · 6日間','2026年4月9〜14日','TG644/TG645便'],
+  tabNums:['1日目 · 4/9（木）','2日目 · 4/10（金）','3日目 · 4/11（土）','4日目 · 4/12（日）','5日目 · 4/13（月）','6日目 · 4/14（火）'],
+  tabTitles:['日間賀島 🏝️','ビーチランド 🐬','高山 🏔️','瀬戸 🐱','ジブリ 🎬','帰国 ✈️'],
+  days:[
+    {
+      num:'1',cls:'d1',
+      title:'日間賀島 🏝️',
+      sub:'木曜日 4月9日 · NGO着 08:00 · 4名',
+      weather:['🌤 最高 19°C','🌡 最低 9°C','🌧 降水 80%','💨 風 23 km/h'],
+      wwarn:'⚠ 傘・ウインドブレーカー必須',
+      outfit:['👕 長袖','🧥 ウインドブレーカー','👖 長ズボン','👟 防水シューズ','☂️ 折り畳み傘','🧢 帽子'],
+      routeLbl:'アクセス — NGOから島へ',
+      route:[{t:'NGO',s:'08:00'},{t:'名鉄 河和線',s:'約50分'},{t:'河和港',s:'徒歩8分'},{t:'高速船',s:'約20分'},{t:'東港 ✓',s:'ホテル近く',star:true}],
+      tl:[
+        {t:'08:00',title:'到着 → 出発',desc:'荷物を受け取り、名鉄河和線に乗車',cls:'c-blue'},
+        {t:'〜10:00',title:'東港着 → ホテルに荷物を預ける',desc:'東港からホテルひまか荘まで徒歩約5分 · チェックインは15:00〜',cls:'c-green',badges:[{c:'b-hist',t:'🏛 島の半分は宮内庁所有・歴史は1,400年以上'}]},
+        {t:'10:30',title:'西港散策 + タコのモニュメント',desc:'島を徒歩約15分で横断 · タコ像＆タコ型交番（日本唯一！）を撮影',cls:'',badges:[{c:'b-hist',t:'🐙 伝説：漁師の網に大タコに守られた仏像がかかった — "タコの島"の由来'}]},
+        {t:'11:30',title:'昼食 — 乙姫（西港すぐ）',desc:'丸茹でタコ・新鮮刺身 · 店内に大きな水槽あり',cls:'c-gold',badges:[{c:'b-tip',t:'⏰ 11:30前に入店を！行列必至'}]},
+        {t:'13:30',title:'サンセットビーチ + ハイジのブランコ',desc:'丘の上の木製ブランコ · 島一番の写真スポット',cls:'',badges:[{c:'b-tip',t:'☔ 雨の場合は西港近くのカフェへ'}]},
+        {t:'14:30',title:'安楽寺 + おみやげ',desc:'東港から徒歩4分 · タコ絵馬 · タコまんじゅうをお土産に',cls:'',badges:[{c:'b-hist',t:'🏛 1493年創建 · 島最古の「タコ阿弥陀」を安置'}]},
+        {t:'14:50',title:'光海院 — 四十七士・大高源五の碑',desc:'大高源五（赤穂浪士のひとり）の生誕地',cls:'',badges:[{c:'b-hist',t:'⚔️ 47士のひとり、1672年この島生まれ'}]},
+        {t:'15:00',title:'ホテルひまか荘 チェックイン',desc:'休憩 · 浴衣 · 三河湾を望む温泉でリラックス',cls:'c-coral'},
+        {t:'18:00',title:'夕食 — プランに込み！',desc:'舟盛り · 丸茹でタコ · 毛ガニ · 新鮮刺身',cls:'c-gold'}
+      ],
+      notesLbl:'メモ',
+      notes:[{k:'チェックイン',v:'15:00〜19:30'},{k:'下船港',v:'東港（ホテル近く）'},{k:'お金',v:'現金持参を'},{k:'島の外周',v:'約5.5km / 2時間'}]
+    },
+    {
+      num:'2',cls:'d2',
+      title:'南知多ビーチランド 🐬',
+      sub:'金曜日 4月10日 · 午前は島 → 午後は陸へ · 4名',
+      weather:['🌤 最高 19°C','🌡 最低 13°C','🌧 降水 80%','💨 風 23 km/h'],
+      wwarn:'⚠ 傘必須・風強い',
+      outfit:['👕 長袖','🧥 レインコート','👖 長ズボン','👟 歩きやすい靴','☂️ 折り畳み傘'],
+      routeLbl:'アクセス — 島からビーチランドへ',
+      route:[{t:'ひまか荘',s:'東港'},{t:'船＋電車',s:'約1.5時間'},{t:'知多奥田駅',s:'下車'},{t:'カメノイ 荷物預け',s:'徒歩約15分',star:true},{t:'ビーチランド',s:'徒歩約6分',star:true}],
+      tl:[
+        {t:'07:00',title:'朝食 — ホテルひまか荘（プラン込み）',desc:'三河湾の朝の景色を眺めながら朝食',cls:'c-gold',badges:[{c:'b-tip',t:'⏰ チェックアウトは10:00まで · 荷物の準備を'}]},
+        {t:'08:30',title:'チェックアウト → 東港へ',desc:'ホテルから東港まで徒歩5分 · 高速船で本土へ',cls:'c-blue'},
+        {t:'〜10:15',title:'カメノイホテルで荷物を預ける',desc:'駅からカメノイまで徒歩約15分 · 荷物を預けてビーチランドまで徒歩6分',cls:'c-green',badges:[{c:'b-tip',t:'💬「荷物を預けられますか？」と伝えましょう'},{c:'b-good',t:'身軽に1日楽しめます！'}]},
+        {t:'10:45',title:'ビーチランド入園！身軽に楽しもう',desc:'入口でショースケジュールを確認してから回ろう',cls:'c-green',badges:[{c:'b-hist',t:'🏛 1980年開業 · 日本一の体験型水族館 · 1,000トン水槽'}],prices:['大人 2,200円','子供 1,100円','乗り放題 2,200円']},
+        {t:'11:00',title:'イルカ・アシカショー',desc:'ここの見どころ！1日複数回開催',cls:'c-blue',badges:[{c:'b-good',t:'ファミリーに最高'}]},
+        {t:'12:00',title:'ふれあい体験 — 海の生き物と触れ合う',desc:'アザラシ・セイウチ・ペンギンへのエサやり＆タッチ',cls:'c-blue',badges:[{c:'b-good',t:'絶対見逃せない！'}]},
+        {t:'13:00',title:'昼食 — 園内レストラン',desc:'ビーチランド内に複数の飲食店あり',cls:'c-gold'},
+        {t:'14:00',title:'おもちゃ王国 — 600種類のおもちゃ',desc:'プラレール · リカちゃん人形 · 子供が夢中になること間違いなし',cls:'',badges:[{c:'b-hist',t:'🏛 2006年開設 · 遊びを通じた学びの場'}]},
+        {t:'15:00',title:'カメノイへ戻る → チェックイン！',desc:'徒歩6分 · 荷物受け取り · チェックイン · 伊勢湾を望む露天風呂へ',cls:'c-coral',badges:[{c:'b-good',t:'pH8.1の美肌の湯 · 特別室からセントレアが見える！'}]},
+        {t:'18:00',title:'夕食 — 未定（おすすめ2選）',desc:'⭐ おすすめ: まるは食堂旅館 — エリア人気No.1 · 豪快なジャンボエビフライ＋新鮮刺身 · 車で約15分 · 要予約 +81-569-65-1315 | またはカメノイホテル内レストランもあり',cls:'c-gold',badges:[{c:'b-tip',t:'📞 まるは：17:00〜20:00 · 混むので事前予約がおすすめ'},{c:'b-hist',t:'🦐 おすすめメニュー：ジャンボエビフライ・刺身盛り・フグ（要相談）'}]}
+      ],
+      notesLbl:'メモ',
+      notes:[{k:'チェックアウト（ひまか荘）',v:'10:00まで'},{k:'チェックイン（カメノイ）',v:'15:00〜'},{k:'ビーチランド閉園',v:'16:00（平日）'},{k:'カメノイ↔ビーチランド',v:'徒歩約6分'}]
+    },
+    {
+      num:'3',cls:'d3',
+      title:'名古屋 → 飛騨高山 🏔️',
+      sub:'土曜日 4月11日 · 5名（ゆうこ合流11:00）',
+      weather:['🌤 最高 21°C','🌡 最低 11°C','🌤 晴れ時々曇り 20%','💨 風 15 km/h'],
+      wwarn:'✅ 旅行中で最高の天気！',
+      outfit:['👕 長袖','🧥 薄手のジャケット','👖 長ズボン','👟 歩きやすい靴','🧣 スカーフ（高山は涼しい）'],
+      routeLbl:'アクセス — 名古屋→高山（レンタカー）',
+      route:[{t:'カメノイ',s:'チェックアウト'},{t:'名古屋',s:'レンタカー+ゆうこ合流',star:true},{t:'ドライブ',s:'約2.5時間'},{t:'高山',s:'FAV LUXチェックイン'}],
+      tl:[
+        {t:'08:00',title:'朝食 + カメノイチェックアウト',desc:'ホテルの朝食 · 10:00までにチェックアウト',cls:'c-gold'},
+        {t:'10:00',title:'レンタカー受取 + ゆうこと合流',desc:'カメノイから名古屋へ移動 · レンタカーの受け取りと同じ場所でゆうこと合流 · 5名全員揃って出発！',cls:'c-green',badges:[{c:'b-good',t:'👋 ゆうこさん、合流！'},{c:'b-tip',t:'🚗 ETCカードとGPSを準備しておきましょう'}]},
+        {t:'〜12:30',title:'高山到着 + 昼食',desc:'市内のレストランで昼食 · 飛騨牛または高山ラーメンがおすすめ',cls:'c-gold',badges:[{c:'b-hist',t:'🏔️ 高山は「小京都」と呼ばれる · 江戸時代の商家町が最もよく保存された街のひとつ'}]},
+        {t:'14:30',title:'三町筋 — 江戸の旧市街を散策',desc:'江戸時代の木造建築が立ち並ぶ通り · 酒蔵 · 工芸品店 · 飛騨牛串焼き',cls:'c-green',badges:[{c:'b-hist',t:'🏛 幕府直轄地として栄え、腕のいい大工・職人を多く輩出した歴史ある町'}]},
+        {t:'15:30',title:'宮川朝市エリアを散策',desc:'朝市は終わっているが、宮川沿いの風景は美しい · 写真スポット多数',cls:''},
+        {t:'16:00',title:'高山陣屋 — 江戸時代の代官所',desc:'江戸幕府直轄の陣屋跡 · 日本で唯一現存する江戸時代の代官所 · 英語案内あり',cls:'',badges:[{c:'b-hist',t:'🏛 1692年建設 · 1969年まで277年間使われた現役の行政機関だった！'}]},
+        {t:'17:30',title:'FAV LUX HIDAТАКАЯМАチェックイン',desc:'和風ホテル · 朝食付き · 1部屋5名',cls:'c-coral'},
+        {t:'19:00',title:'夕食 — 未定（おすすめ2選）',desc:'⭐ おすすめ1: 洲さき（Suzuya） — 三町筋の古民家で飛騨牛すき焼き · 2,500〜3,500円/人 · English friendly | ⭐ おすすめ2: 飛騨牛まるあき — 自社農場直送の飛騨牛 · 予約不可、早めに入店を',cls:'c-gold',badges:[{c:'b-tip',t:'🥩 洲さき: 花川町24番地 · 英語メニューあり · 〜20:00営業'},{c:'b-hist',t:'🏛 飛騨牛＝岐阜県産の黒毛和牛 · 霜降りが美しく神戸牛に劣らない絶品'}]}
+      ],
+      notesLbl:'メモ',
+      notes:[{k:'FAV LUX チェックイン',v:'予約時刻通り'},{k:'人数',v:'5名（ゆうこ含む）'},{k:'所要時間',v:'名古屋→高山 約2.5時間'},{k:'高山の気温',v:'名古屋より約5°C低い'}]
+    },
+    {
+      num:'4',cls:'d4',
+      title:'高山 → 瀬戸 🐱',
+      sub:'日曜日 4月12日 · 5名 · レンタカー移動',
+      weather:['🌤 最高 20°C','🌡 最低 12°C','🌦 一時雨 50%','💨 風 12 km/h'],
+      wwarn:'⚠ 雨の可能性あり、傘を持参',
+      outfit:['👕 長袖','🧥 薄手のジャケット','👖 長ズボン','👟 歩きやすい靴','☂️ 折り畳み傘'],
+      routeLbl:'アクセス — 高山→瀬戸（レンタカー）',
+      route:[{t:'FAV LUX',s:'チェックアウト'},{t:'ドライブ',s:'約2時間'},{t:'瀬戸市',s:'Seto City'},{t:'招き猫ミュージアム',s:'縁起猫',star:true},{t:'瀬戸蔵',s:'陶磁器',star:true},{t:'益久',s:'チェックイン'}],
+      tl:[
+        {t:'08:00',title:'朝食（プラン込み） + チェックアウト',desc:'FAV LUXで朝食 · チェックアウトして出発',cls:'c-gold'},
+        {t:'09:00',title:'高山→瀬戸へドライブ',desc:'距離約120km · 所要約2時間 · 日本アルプスの山々を眺めながらドライブ',cls:'c-blue'},
+        {t:'11:00',title:'招き猫ミュージアム',desc:'全国から集めた招き猫約5,000体を展示 · 招き猫の絵付けワークショップあり',cls:'c-green',badges:[{c:'b-hist',t:'🐱 瀬戸は20世紀初頭から招き猫（旧瀬戸スタイル）を製造 · 日本最大の招き猫博物館'}],prices:['大人 約500円','絵付けワークショップ 別途']},
+        {t:'12:30',title:'昼食 + 瀬戸蔵ミュージアム',desc:'瀬戸蔵内の食事処で昼食 · その後陶磁器の歴史を学ぶ',cls:'c-gold',badges:[{c:'b-hist',t:'🏺 瀬戸焼の歴史は1,000年以上 · 日本六古窯のひとつ · 全陶磁器生産の半分以上を担った時代も'}],prices:['大人 520円','高校生・大学生 310円']},
+        {t:'14:00',title:'窯垣の小径 — 陶器の壁が続く路地',desc:'両側の塀に古い陶磁器の破片が埋め込まれた全長400mの散策路',cls:'',badges:[{c:'b-hist',t:'🏛 100年以上前の陶器の廃材で作られた塀 · 窯業の町の歴史を今に伝える'}]},
+        {t:'15:30',title:'益久にチェックイン',desc:'2部屋 · 食事なし · Google Mapsで場所を事前確認しておきましょう',cls:'c-coral',badges:[{c:'b-tip',t:'📍 事前にGoogle Mapsで場所を確認'}]},
+        {t:'18:00',title:'夕食 — 未定（名古屋めしおすすめ2選）',desc:'⭐ おすすめ1: 矢場とん（Yabaton） — 味噌カツの老舗60年以上 · 名古屋駅周辺に複数店舗 | ⭐ おすすめ2: 世界の山ちゃん — テバサキ発祥の店 · 1981年創業・ビールとの相性抜群',cls:'c-gold',badges:[{c:'b-tip',t:'🍱 名古屋めし必食：味噌カツ · テバサキ · ひつまぶし（うなぎ丼）'},{c:'b-hist',t:'🏙 名古屋は独自の食文化「名古屋めし」が発展 · 他の地域とは一線を画す個性派グルメ'}]}
+      ],
+      notesLbl:'メモ',
+      notes:[{k:'招き猫ミュージアム',v:'火曜定休'},{k:'瀬戸蔵',v:'9:00〜17:00'},{k:'入館料（瀬戸蔵）',v:'520円/人'},{k:'益久',v:'2部屋 · 食事なし'}]
+    },
+    {
+      num:'5',cls:'d5',
+      title:'ジブリパーク + 帰国 🎬',
+      sub:'月曜日 4月13日 · 5名→ゆうこは大阪へ · 翌日帰国',
+      weather:['🌤 最高 19°C','🌡 最低 12°C','🌦 一時雨 40%','💨 風 10 km/h'],
+      wwarn:'⚠ 雨の可能性あり、傘を忘れずに',
+      outfit:['👕 長袖','🧥 ジャケット','👖 長ズボン','👟 歩きやすい靴','☂️ 折り畳み傘'],
+      routeLbl:'アクセス — ジブリパークへ',
+      route:[{t:'益久',s:'チェックアウト'},{t:'レンタカー返却',s:'名古屋'},{t:'電車+リニモ',s:'約50分',star:true},{t:'ジブリパーク',s:'時間指定入場'},{t:'サンコーイン',s:'チェックイン'}],
+      tl:[
+        {t:'07:00',title:'朝食 + 益久チェックアウト',desc:'チェックアウト · 荷物をまとめてレンタカーを返却',cls:'c-gold'},
+        {t:'09:00',title:'レンタカー返却 → ジブリパークへ',desc:'名古屋駅から：東山線 → 藤が丘 → リニモ → 愛・地球博記念公園駅',cls:'c-blue',badges:[{c:'b-tip',t:'🚇 名古屋駅からの所要時間は約50分'}]},
+        {t:'10:00',title:'ジブリパーク入園 — グランドウェアハウス（時間指定）',desc:'チケットに記載された時間に入場 · 千と千尋・トトロ・ハウルの展示',cls:'c-green',badges:[{c:'b-hist',t:'🎬 2022年開業 · 愛・地球博2005跡地 · 宮崎駿監修で自然と調和した設計'}],prices:['お散歩プレミアム 7,800円','お散歩スタンダード 4,500円']},
+        {t:'11:00',title:'もののけの里 — もののけ姫の村',desc:'山里の雰囲気 · 五平餅作り体験あり（有料）',cls:''},
+        {t:'12:30',title:'昼食 — 園内レストラン',desc:'トランスコンチネンタルフライトカフェ または フライングオーブン · ジブリテーマの料理',cls:'c-gold',badges:[{c:'b-tip',t:'🍽 テーブルは早めに確保を！すぐ満席になります'}]},
+        {t:'13:30',title:'魔女の谷 — ハウルの城 + キキのベーカリー',desc:'ハウルの動く城 · 魔女の宅急便のベーカリー · 中に入るにはプレミアムパスが必要',cls:'c-green',badges:[{c:'b-tip',t:'⭐ プレミアムパスはハウルの城の内部に入れるので価値あり！'}]},
+        {t:'15:30',title:'ジブリグッズ購入',desc:'グランドウェアハウス内のショップ · ジブリパーク限定グッズはここだけ！',cls:'',badges:[{c:'b-tip',t:'🛍 ジブリパーク限定グッズは他では手に入りません'}]},
+        {t:'17:00',title:'サンコーイン名古屋新幹線口チェックイン',desc:'2部屋 · 食事なし · 新幹線駅に近く、翌日の空港アクセスも便利',cls:'c-coral'},
+        {t:'18:30',title:'夕食 + 名古屋でショッピング',desc:'栄エリアまたは名古屋駅 · 味噌カツ・ひつまぶし・名古屋ラーメンで締めくくり',cls:'c-gold',badges:[{c:'b-tip',t:'✈️ 翌日 TG645 11:00発 · 新幹線で空港まで約30分'}]}
+      ],
+      notesLbl:'最終日のメモ',
+      notes:[{k:'ジブリパーク定休',v:'火曜定休 ✅ 月曜は営業'},{k:'チケット',v:'事前購入必須（Klook/ローソン）'},{k:'帰りの便',v:'TG645 · 4/14 · 11:00発'},{k:'サンコーイン',v:'NGO新幹線口すぐ'}]
+    },
+    {
+      num:'6',cls:'d1',
+      title:'帰国日 ✈️',
+      sub:'火曜日 4月14日 · 4名 · TG645 11:00発',
+      weather:['🌤 最高 20°C','🌡 最低 12°C','🌦 小雨 70%','💨 風 15 km/h'],
+      wwarn:'⚠ 小雨の可能性 · 出発前に天気確認を',
+      outfit:['👕 機内で快適な服装','🧥 薄手のカーディガン（機内は寒い）','👟 脱ぎ履きしやすい靴','🎒 必需品はリュックへ'],
+      routeLbl:'アクセス — サンコーイン → NGO空港',
+      route:[{t:'サンコーイン',s:'チェックアウト'},{t:'名鉄特急',s:'約30分',star:true},{t:'NGO第1ターミナル',s:'TG645'},{t:'BKK スワンナプーム',s:'15:00着'}],
+      tl:[
+        {t:'07:00',title:'起床 + 荷物の最終確認',desc:'荷物を確認 · お土産の梱包 · パスポート・搭乗券を手元に',cls:'c-blue',badges:[{c:'b-tip',t:'📋 チェックリスト：パスポート・搭乗券・充電器・薬・お土産'}]},
+        {t:'08:00',title:'軽めの朝食',desc:'ホテル近くのコンビニまたは駅構内で · 日本の7-Elevenのご飯は本当においしい！',cls:'c-gold',badges:[{c:'b-tip',t:'🍱 駅のコンビニでおにぎりやサンドイッチを購入するのがおすすめ'}]},
+        {t:'08:30',title:'サンコーインをチェックアウト',desc:'チェックアウト · スタッフに感謝 · 名古屋新幹線駅へ移動',cls:''},
+        {t:'09:00',title:'名鉄でNGOへ出発',desc:'名古屋駅から名鉄特急でセントレア（NGO）へ · 約30分',cls:'c-blue',badges:[{c:'b-tip',t:'🚄 名鉄ミュースカイ（名古屋→中部国際空港）· 片道約870円'}]},
+        {t:'09:30',title:'NGO到着 · 第1ターミナル',desc:'タイ航空カウンターでチェックイン · TG645 · 出発1.5時間前には到着を',cls:'c-green',badges:[{c:'b-tip',t:'🛂 出国審査に余裕を持って'}]},
+        {t:'10:00',title:'出国審査 + 免税店でラストショッピング',desc:'免税店でお買い物 · 抹茶キットカット · 和菓子 · 日本酒 · 化粧品',cls:'',badges:[{c:'b-tip',t:'🛍 NGOの免税店は充実 · 抹茶・宇治抹茶キットカットはここで！'}]},
+        {t:'11:00',title:'✈️ TG645 出発 — 名古屋 → バンコク',desc:'搭乗は10:30〜 · 飛行時間約6時間 · バンコク(スワンナプーム)着 15:00',cls:'c-coral',badges:[{c:'b-good',t:'🏠 おかえり！素晴らしい旅でした 🎌'}]}
+      ],
+      notesLbl:'出発当日のメモ',
+      notes:[{k:'便名',v:'TG645 · 11:00発'},{k:'ターミナル',v:'NGO 第1ターミナル'},{k:'チェックイン締切',v:'10:15まで'},{k:'バンコク着',v:'15:00（スワンナプーム）'}]
+    }
+  ],
+  footer:'Claudeが作成 · 2026年4月 · 良い旅を！🎌'
+};
+
+var lang = 'th';
+var day = 1;
+
+function setLang(l) {
+  lang = l;
+  document.getElementById('btn-th').classList.toggle('active', l==='th');
+  document.getElementById('btn-jp').classList.toggle('active', l==='jp');
+  document.body.style.fontFamily = l==='jp' ? "'Noto Sans JP',sans-serif" : "'Noto Sans Thai','Noto Sans JP',sans-serif";
+  render();
+}
+
+function setDay(d) {
+  day = d;
+  render();
+}
+
+function render() {
+  var D = lang==='th' ? TH : JP;
+  var data = D.days[day-1];
+
+  // Hero
+  document.getElementById('h-sub').textContent = D.heroSub;
+  document.getElementById('h-title').innerHTML = D.heroTitle;
+  document.getElementById('h-sub2').textContent = D.heroSub2;
+  document.getElementById('h-tags').innerHTML = D.heroTags.map(function(t){return '<span class="hero-tag">'+t+'</span>';}).join('');
+
+  // Tabs
+  for(var i=1;i<=6;i++){
+    var tab = document.getElementById('tab-'+i);
+    document.getElementById('tab'+i+'-num').textContent = D.tabNums[i-1];
+    document.getElementById('tab'+i+'-title').textContent = D.tabTitles[i-1];
+    tab.className = 'day-tab' + (day===i ? ' active-d'+i : '');
+  }
+
+  // Build content
+  var html = '';
+
+  // Day header
+  html += '<div class="day-hd"><div class="day-num '+data.cls+'">'+data.num+'</div><div><h2>'+data.title+'</h2><p>'+data.sub+'</p></div></div>';
+
+  // Weather
+  html += '<div class="weather-bar">';
+  data.weather.forEach(function(w){html+='<span class="w-pill">'+w+'</span>';});
+  html += '<span class="w-warn">'+data.wwarn+'</span></div>';
+
+  // Outfit
+  html += '<div class="outfit-row">';
+  data.outfit.forEach(function(o){html+='<span class="otag">'+o+'</span>';});
+  html += '</div>';
+
+  // Route
+  html += '<div class="route-card"><div class="route-lbl">'+data.routeLbl+'</div><div class="route-steps">';
+  data.route.forEach(function(r,ri){
+    if(ri>0) html+='<span class="rarr">→</span>';
+    html+='<div class="rs'+(r.star?' star':'')+'">'+r.t+'<small>'+r.s+'</small></div>';
+  });
+  html += '</div></div>';
+
+  // Timeline
+  data.tl.forEach(function(item){
+    html += '<div class="tl-row"><div class="tl-t">'+item.t+'</div><div class="card '+item.cls+'">';
+    html += '<div class="card-title">'+item.title+'</div>';
+    html += '<div class="card-desc">'+item.desc+'</div>';
+    if(item.badges) item.badges.forEach(function(b){html+='<span class="badge '+b.c+'">'+b.t+'</span>';});
+    if(item.prices){html+='<div class="prices">';item.prices.forEach(function(p){html+='<span class="ptag">'+p+'</span>';});html+='</div>';}
+    html += '</div></div>';
+  });
+
+  // Notes
+  html += '<p class="notes-lbl">'+data.notesLbl+'</p><div class="notes-grid">';
+  data.notes.forEach(function(n){html+='<div class="ni"><div class="ni-k">'+n.k+'</div><div class="ni-v">'+n.v+'</div></div>';});
+  html += '</div>';
+
+  html += '<div class="footer">'+D.footer+'</div>';
+
+  document.getElementById('main-content').innerHTML = html;
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+render();
+</script>
+</body>
+</html>
